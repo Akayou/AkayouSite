@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AkayouSite">
+  <DataContextMoniker Name="/AkayouSiteDataContext" />
+  <nestedChildShapes>
+    <classShape Id="dcc91587-ef6a-49a7-95d1-a45fcd58e304" absoluteBounds="1.5, 0.5, 2, 5.0400211588541657">
+      <DataClassMoniker Name="/AkayouSiteDataContext/Cadastro" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4e1c46d5-068d-41c9-a45c-35c2b644c750" absoluteBounds="1.5150000000000001, 0.96, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.20923076923077 : 5.54002115885417); (2.20923076923077 : 5.79002115885417); (2.80461538461538 : 5.79002115885417); (2.80461538461538 : 5.54002115885417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AkayouSiteDataContext/Cadastro/Cadastro_Cadastro" />
+      <nodes>
+        <classShapeMoniker Id="dcc91587-ef6a-49a7-95d1-a45fcd58e304" />
+        <classShapeMoniker Id="dcc91587-ef6a-49a7-95d1-a45fcd58e304" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.20923076923077 : 0.5); (2.20923076923077 : 0.25); (2.80461538461538 : 0.25); (2.80461538461538 : 0.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AkayouSiteDataContext/Cadastro/Cadastro_Cadastro1" />
+      <nodes>
+        <classShapeMoniker Id="dcc91587-ef6a-49a7-95d1-a45fcd58e304" />
+        <classShapeMoniker Id="dcc91587-ef6a-49a7-95d1-a45fcd58e304" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

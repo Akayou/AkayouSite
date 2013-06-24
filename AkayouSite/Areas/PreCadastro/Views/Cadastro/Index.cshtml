@@ -1,4 +1,6 @@
-﻿@{
+﻿@model AkayouSite.Areas.PreCadastro.Models.CadastroIndexViewModel
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
 }
@@ -86,6 +88,8 @@
 
         // telas
         $('.menuitem').click(function() {
+            persiste();
+            
             $('.pagina').hide();
 
             $('.nav2 .voltar, .nav2 .avancar').show();
@@ -102,6 +106,7 @@
         $('.menuitem:first').click();
         
         $('.nav2 .voltar').click(function() {
+            persiste();
             var aberta = $('.pagina:visible');
             if (aberta.hasClass('informacoes-pessoais')) return;
             else if (aberta.hasClass('endereco')) $('.menuitem[item=informacoes-pessoais]').click();
@@ -109,6 +114,7 @@
             else if (aberta.hasClass('seguranca')) $('.menuitem[item=informacoes-contato]').click();
         });
         $('.nav2 .avancar').click(function() {
+            persiste();
             var aberta = $('.pagina:visible');
             if (aberta.hasClass('seguranca')) return;
             else if (aberta.hasClass('informacoes-contato')) $('.menuitem[item=seguranca]').click();
@@ -116,6 +122,33 @@
             else if (aberta.hasClass('informacoes-pessoais')) $('.menuitem[item=endereco]').click();
         });
     });
+
+    var persiste = function() {
+        $.ajax({
+            url: '/PreCad/Cadastro/Persiste', 
+            type: 'post', 
+            data: {
+                finalizar: false, 
+                cadastroGuid: $('#cadastroGuid').val(), 
+                upline: null, 
+                nome: $('#nome').val(), 
+                sobrenome: $('#sobrenome').val(), 
+                cpf: $('#cpf').val(), 
+                rg: $('#rg').val(), 
+                pisPasep: $('#pisPasep').val(), 
+                dataNascimento: $('#dataNascimento').val(), 
+                cep: $('#cep').val(), 
+                endereco: $('#endereco').val(), 
+                bairro: $('#bairro').val(), 
+                complemento: $('#complemento').val(), 
+                cidade: $('#cidade').val(), 
+                telCelular: $('#telCelular').val(), 
+                telResidencial: $('#telResidencial').val(), 
+                telComercial: $('#telComercial').val(), 
+                email: $('#email').val()
+            }
+        });
+    };
 }
 
 <nav>
@@ -126,41 +159,42 @@
 </nav>
 
 <form class="cadastro">
+<input id="cadastroGuid" type="hidden" value="@Model.CadastroGuid" />
 <div class="pagina informacoes-pessoais" item="informacoes-pessoais">
     <div class="col esq">
-        <span class="field"><label for="nome">Nome*</label><input id="nome" type="text" /></span>
-        <span class="field"><label for="cpf">CPF*</label><input id="cpf" type="text" /></span>
-        <span class="field"><label for="pispasep">PIS/PASEP*</label><input id="pispasep" type="text" /></span>
+        <span class="field"><label for="nome">Nome*</label><input id="nome" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Nome : "")" /></span>
+        <span class="field"><label for="cpf">CPF*</label><input id="cpf" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Cpf : "")" /></span>
+        <span class="field"><label for="pispasep">PIS/PASEP*</label><input id="pisPasep" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.PisPasep : "")" /></span>
     </div>
 
     <div class="col dir">
-        <span class="field"><label for="sobrenome">Sobrenome*</label><input id="sobrenome" type="text" /></span>
-        <span class="field"><label for="rg">RG*</label><input id="rg" type="text" /></span>
-        <span class="field"><label for="datanascimento">Data de Nascimento (dd/mm/aaaa)*</label><input id="datanascimento" type="text" /></span>
+        <span class="field"><label for="sobrenome">Sobrenome*</label><input id="sobrenome" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Sobrenome : "")" /></span>
+        <span class="field"><label for="rg">RG*</label><input id="rg" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Rg : "")" /></span>
+        <span class="field"><label for="datanascimento">Data de Nascimento (dd/mm/aaaa)*</label><input id="dataNascimento" type="text" value="@(Model.Cadastro != null && Model.Cadastro.DataNascimento.HasValue ? Model.Cadastro.DataNascimento.Value.ToString("dd/MM/yyyy") : "")" /></span>
     </div>
 </div>
 <div class="pagina endereco" item="endereco">
     <div class="col esq">
-        <span class="field"><label for="nome">CEP*</label><input id="nome" type="text" /></span>
-        <span class="field"><label for="cpf">Bairro*</label><input id="cpf" type="text" /></span>
-        <span class="field"><label for="pispasep">Cidade*</label><input id="pispasep" type="text" /></span>
+        <span class="field"><label for="cep">CEP*</label><input id="cep" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Cep : "")" /></span>
+        <span class="field"><label for="bairro">Bairro*</label><input id="bairro" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Bairro : "")" /></span>
+        <span class="field"><label for="cidade">Cidade*</label><input id="cidade" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Cidade : "")" /></span>
     </div>
 
     <div class="col dir">
-        <span class="field"><label for="sobrenome">Endereço*</label><input id="sobrenome" type="text" /></span>
-        <span class="field"><label for="rg">Complemento*</label><input id="rg" type="text" /></span>
+        <span class="field"><label for="endereco">Endereço*</label><input id="endereco" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Endereco : "")" /></span>
+        <span class="field"><label for="complemento">Complemento*</label><input id="complemento" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Complemento : "")" /></span>
     </div>
 </div>
 <div class="pagina informacoes-contato" item="informacoes-contato">
     <div class="col esq">
-        <span class="field"><label for="nome">Celular*</label><input id="nome" type="text" /></span>
-        <span class="field"><label for="cpf">Telefone Trabalho*</label><input id="cpf" type="text" /></span>
-        <span class="field"><label for="pispasep">E-mail*</label><input id="pispasep" type="text" /></span>
+        <span class="field"><label for="telCelular">Celular*</label><input id="telCelular" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.TelCelular : "")" /></span>
+        <span class="field"><label for="telComercial">Telefone Trabalho*</label><input id="telComercial" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.TelComercial : "")" /></span>
+        <span class="field"><label for="email">E-mail*</label><input id="email" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Email : "")" /></span>
     </div>
 
     <div class="col dir">
-        <span class="field"><label for="sobrenome">Telefone Residencial*</label><input id="sobrenome" type="text" /></span>
-        <span class="field"><label for="rg">Confirmar E-mail*</label><input id="rg" type="text" /></span>
+        <span class="field"><label for="telResidencial">Telefone Residencial*</label><input id="telResidencial" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.TelResidencial : "")" /></span>
+        <span class="field"><label for="emailConfirmar">Confirmar E-mail*</label><input id="emailConfirmar" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Email : "")" /></span>
     </div>
 </div>
 <div class="pagina seguranca" item="seguranca">

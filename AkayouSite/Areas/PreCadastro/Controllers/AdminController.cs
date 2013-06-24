@@ -11,7 +11,7 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
         [Authorize(Roles="Sysadm,Admin")]
         public ActionResult Index(int page = 1)
         {
-            var precads = Db.PreCadastro.Skip((page - 1) * 50).Take(50).OrderByDescending(pc => pc.DataCadastro).ToList();
+            var precads = Db.Cadastro.Skip((page - 1) * 50).Take(50).OrderByDescending(pc => pc.DataCadastro).ToList();
 
             var model = new Models.AdminIndexViewModel()
             {
@@ -24,10 +24,10 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
         [Authorize(Roles = "Sysadm,Admin")]
         public ActionResult Edita(int? pc)
         {
-            AkayouSite.Db.PreCadastro precad = null;
+            AkayouSite.Db.Cadastro precad = null;
             if (pc.HasValue)
             {
-                precad = Db.PreCadastro.SingleOrDefault(_pc => _pc.Id == pc.Value);
+                precad = Db.Cadastro.SingleOrDefault(_pc => _pc.Id == pc.Value);
                 if (precad == null) return RedirectToAction("Index");
             }
 

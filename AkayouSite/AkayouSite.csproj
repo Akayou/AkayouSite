@@ -118,13 +118,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AkayouSite.cs">
-      <DependentUpon>AkayouSite.dbml</DependentUpon>
+    <Compile Include="AkayouSiteDb.cs">
+      <DependentUpon>AkayouSiteDb.dbml</DependentUpon>
     </Compile>
-    <Compile Include="AkayouSite.designer.cs">
+    <Compile Include="AkayouSiteDb.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AkayouSite.dbml</DependentUpon>
+      <DependentUpon>AkayouSiteDb.dbml</DependentUpon>
     </Compile>
     <Compile Include="Areas\PreCadastro\Controllers\AdminController.cs" />
     <Compile Include="Areas\PreCadastro\Controllers\CadastroController.cs" />
@@ -172,13 +172,13 @@
     <Content Include="Areas\PreCadastro\Views\Usuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AkayouSite.dbml">
+    <Content Include="AkayouSiteDb.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>AkayouSite.designer.cs</LastGenOutput>
+      <LastGenOutput>AkayouSiteDb.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="AkayouSite.dbml.layout">
-      <DependentUpon>AkayouSite.dbml</DependentUpon>
+    <None Include="AkayouSiteDb.dbml.layout">
+      <DependentUpon>AkayouSiteDb.dbml</DependentUpon>
     </None>
     <Content Include="Areas\PreCadastro\Views\Admin\Index.cshtml" />
     <Content Include="Areas\PreCadastro\Views\Admin\Edita.cshtml" />

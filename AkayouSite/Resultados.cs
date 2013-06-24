@@ -9,6 +9,7 @@ namespace AkayouSite
     {
         OK, 
         USUARIO_INEXISTENTE, 
-        PRIMEIRO_ACESSO
+        PRIMEIRO_ACESSO, 
+        INFORMACAO_INSUFICIENTE
     }
 }

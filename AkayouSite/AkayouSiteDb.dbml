@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Akayou.Site" EntityNamespace="AkayouSite.Db" Class="AkayouSiteDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=PEDRONOTE\Sqlexpress;Initial Catalog=Akayou.Site;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Akayou_SiteConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Cadastro" Member="Cadastro">
+    <Type Name="Cadastro">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CadastroGuid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Finalizado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DataCadastro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Patrocinador" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Upline" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MembershipUserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Nome" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Sobrenome" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cpf" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Rg" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PisPasep" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DataNascimento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cep" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Endereco" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Bairro" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Complemento" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cidade" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TelCelular" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TelResidencial" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TelComercial" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="Cadastro_Cadastro" Member="Cadastro2" ThisKey="Id" OtherKey="Upline" Type="Cadastro" />
+      <Association Name="Cadastro_Cadastro1" Member="Cadastro4" ThisKey="Id" OtherKey="Patrocinador" Type="Cadastro" />
+      <Association Name="Cadastro_Cadastro" Member="Cadastro1" ThisKey="Upline" OtherKey="Id" Type="Cadastro" IsForeignKey="true" />
+      <Association Name="Cadastro_Cadastro1" Member="Cadastro3" ThisKey="Patrocinador" OtherKey="Id" Type="Cadastro" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
