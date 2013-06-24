@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+}
+
+@section Css {
+    nav {
+        height: 59px;
+        width: 613px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 38px;
+    }
+    nav .menuitem {
+        display: block;
+        float: left;
+        margin-left: 8px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    .logo-akayou {
+        margin-bottom: 22px;
+    }
+    .col {
+        float: left;
+        width: 305px;
+        height: 240px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    .col.esq {
+        margin-left: 98px;
+    }
+    .col.dir {
+        margin-left: 16px;
+    }
+    .field {
+        display: block;
+        height: 80px;
+    }
+    .field label {
+        display: block;
+    }
+    form.cadastro {
+        height: 240px;
+    }
+    form.cadastro input[type=text] {
+        width: 298px;
+    }
+    .pagina {
+        display: none;
+    }
+    .nav2 {
+        width: 630px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 90px;
+    }
+    .nav2 .left {
+        float: left;
+    }
+    .nav2 .right {
+        float: right;
+    }
+    .nav2 .voltar {
+        cursor: pointer;
+    }
+    .nav2 .avancar {
+        cursor: pointer;
+    }
+}
+
+@section Script {
+    $(document).ready(function() {
+        // preload
+        $('.menuitem').each(function() {
+            var img = '/Content/Images/precad-menu-' + $(this).attr('item') + 'on.png';
+            $('<img />')[0].src = img;
+        });
+        
+        // hover
+        $('.menuitem').hover(
+            function() {$(this).children('img').attr('src', '/Content/Images/precad-menu-' + $(this).attr('item') + '-on.png');}, 
+            function() {if ($(this).attr('item') == $('.pagina:visible').attr('item')) return; $(this).children('img').attr('src', '/Content/Images/precad-menu-' + $(this).attr('item') + '-off.png');}
+        );
+
+        // telas
+        $('.menuitem').click(function() {
+            $('.pagina').hide();
+
+            $('.nav2 .voltar, .nav2 .avancar').show();
+            if ($(this).attr('item') == 'informacoes-pessoais') $('.nav2 .voltar').hide();
+            else if ($(this).attr('item') == 'seguranca') $('.nav2 .avancar').hide();
+
+            $('.pagina.' + $(this).attr('item')).fadeIn('fast', function() {
+                $('.pagina:visible .field input:first').focus();
+            });
+            
+            $('.menuitem').mouseleave();
+            $('.menuitem[item=' + $(this).attr('item') + ']').mouseenter();
+        });
+        $('.menuitem:first').click();
+        
+        $('.nav2 .voltar').click(function() {
+            var aberta = $('.pagina:visible');
+            if (aberta.hasClass('informacoes-pessoais')) return;
+            else if (aberta.hasClass('endereco')) $('.menuitem[item=informacoes-pessoais]').click();
+            else if (aberta.hasClass('informacoes-contato')) $('.menuitem[item=endereco]').click();
+            else if (aberta.hasClass('seguranca')) $('.menuitem[item=informacoes-contato]').click();
+        });
+        $('.nav2 .avancar').click(function() {
+            var aberta = $('.pagina:visible');
+            if (aberta.hasClass('seguranca')) return;
+            else if (aberta.hasClass('informacoes-contato')) $('.menuitem[item=seguranca]').click();
+            else if (aberta.hasClass('endereco')) $('.menuitem[item=informacoes-contato]').click();
+            else if (aberta.hasClass('informacoes-pessoais')) $('.menuitem[item=endereco]').click();
+        });
+    });
+}
+
+<nav>
+    <span class="menuitem" item="informacoes-pessoais"><img src="/Content/Images/precad-menu-informacoes-pessoais-off.png" /></span>
+    <span class="menuitem" item="endereco"><img src="/Content/Images/precad-menu-endereco-off.png" /></span>
+    <span class="menuitem" item="informacoes-contato"><img src="/Content/Images/precad-menu-informacoes-contato-off.png" /></span>
+    <span class="menuitem" item="seguranca"><img src="/Content/Images/precad-menu-seguranca-off.png" /></span>
+</nav>
+
+<form class="cadastro">
+<div class="pagina informacoes-pessoais" item="informacoes-pessoais">
+    <div class="col esq">
+        <span class="field"><label for="nome">Nome*</label><input id="nome" type="text" /></span>
+        <span class="field"><label for="cpf">CPF*</label><input id="cpf" type="text" /></span>
+        <span class="field"><label for="pispasep">PIS/PASEP*</label><input id="pispasep" type="text" /></span>
+    </div>
+
+    <div class="col dir">
+        <span class="field"><label for="sobrenome">Sobrenome*</label><input id="sobrenome" type="text" /></span>
+        <span class="field"><label for="rg">RG*</label><input id="rg" type="text" /></span>
+        <span class="field"><label for="datanascimento">Data de Nascimento (dd/mm/aaaa)*</label><input id="datanascimento" type="text" /></span>
+    </div>
+</div>
+<div class="pagina endereco" item="endereco">
+    <div class="col esq">
+        <span class="field"><label for="nome">CEP*</label><input id="nome" type="text" /></span>
+        <span class="field"><label for="cpf">Bairro*</label><input id="cpf" type="text" /></span>
+        <span class="field"><label for="pispasep">Cidade*</label><input id="pispasep" type="text" /></span>
+    </div>
+
+    <div class="col dir">
+        <span class="field"><label for="sobrenome">Endereço*</label><input id="sobrenome" type="text" /></span>
+        <span class="field"><label for="rg">Complemento*</label><input id="rg" type="text" /></span>
+    </div>
+</div>
+<div class="pagina informacoes-contato" item="informacoes-contato">
+    <div class="col esq">
+        <span class="field"><label for="nome">Celular*</label><input id="nome" type="text" /></span>
+        <span class="field"><label for="cpf">Telefone Trabalho*</label><input id="cpf" type="text" /></span>
+        <span class="field"><label for="pispasep">E-mail*</label><input id="pispasep" type="text" /></span>
+    </div>
+
+    <div class="col dir">
+        <span class="field"><label for="sobrenome">Telefone Residencial*</label><input id="sobrenome" type="text" /></span>
+        <span class="field"><label for="rg">Confirmar E-mail*</label><input id="rg" type="text" /></span>
+    </div>
+</div>
+<div class="pagina seguranca" item="seguranca">
+
+</div>
+</form>
+
+<div class="nav2">
+    <span class="left"><img class="voltar" src="/Content/Images/precad-nav-voltar.png" /></span>
+    <span class="right"><img class="avancar" src="/Content/Images/precad-nav-avancar.png" /></span>
+</div>
+
+<div class="sep1"><img src="/Content/Images/precad-sep-1.png" /></div>

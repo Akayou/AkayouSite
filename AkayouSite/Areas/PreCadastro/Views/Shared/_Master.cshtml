@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script>
+        @RenderSection("Script", false)
+    </script>
+    <style type="text/css">
+        body {
+            background: url('/Content/Images/precad-fundo-1.jpg') no-repeat center top fixed;
+            color: #fff;
+            font-family: verdana;
+            font-size: 10pt;
+        }
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        form.cadastro input {
+            background: #fff;
+            height: 18px;
+            border: 1px solid #a1662f;
+            font-size: 14pt;
+            padding: 6px;
+        }
+        form.cadastro input.invalid {
+            background: red;
+        }
+        form.cadastro input.invalid:focus {
+            background: #fff;
+        }
+
+        article {
+            width: 842px;
+            height: 560px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 123px;
+        }
+
+        .logo-akayou {
+            width: 273px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .sep1 {
+            width: 530px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer {
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            clear: left;
+        }
+        @RenderSection("Css", false)
+    </style>
+</head>
+<body>
+    <article>
+
+        <div class="logo-akayou"><img src="/Content/Images/precad-logo-akayou.png" /></div>
+
+        <div class="sep1"><img src="/Content/Images/precad-sep-1.png" /></div>
+    
+        @RenderBody()
+        
+        <footer>&copy; 2013 Akayou. Todos os direitos reservados.           <a href="">Termos e Condições de Uso</a></footer>
+    </article>
+</body>
+</html>

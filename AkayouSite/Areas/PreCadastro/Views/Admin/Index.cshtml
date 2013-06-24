@@ -1,0 +1,41 @@
+﻿@model AkayouSite.Areas.PreCadastro.Models.AdminIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+}
+
+<h2>Pré-Cadastro Akayou - Admin</h2>
+
+<a href="/PreCad/Admin/Edita">Novo</a>
+
+@if (!(Model.PreCadastros != null && Model.PreCadastros.Count > 0))
+{
+    <p>Nenhum registro.</p>
+}
+else {
+
+<table border="0">
+    <thead>
+        <tr>
+            <th>Data cadastro</th>
+            <th>Nome</th>
+            <th>Cpf</th>
+            <th>Cadastrante</th>
+            <th>Superior</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var pc in Model.PreCadastros)
+    {
+        <tr>
+            <td>@pc.DataCadastro.ToString("dd/MM/yy")</td>
+            <td>@pc.NomeCompleto</td>
+            <td>@(pc.Cpf ?? "")</td>
+            <td><a href="/PreCad/Home/"@pc.CadastradoPorReference.NomeCompleto</td>
+        </tr>
+    }
+    </tbody>
+</table>
+    
+}

@@ -1,0 +1,61 @@
+﻿@model AkayouSite.Areas.PreCadastro.Models.AdminEditaViewModel
+
+@{
+    ViewBag.Title = "Edita";
+    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+}
+
+<h2>Pré-Cadastro Akayou - Admin @if (@Model.PreCadastro != null) {<text>- @Model.PreCadastro.NomeCompleto</text>} else {<text>- novo pré-cadastro</text>}</h2>
+
+<form class="cadastro">
+<input id="id" type="hidden" @if (@Model.PreCadastro != null) {<text>value="@Model.PreCadastro.Id"</text>} />
+<label for="dataCadastro">Data cadastro</label>
+<input id="dataCadastro" type="text" readonly="readonly" @if (@Model.PreCadastro != null) {<text>value="@Model.PreCadastro.DataCadastro.ToString("dd/MM/yy")"</text>} else {<text>value="@DateTime.Now.ToString("dd/MM/yy")"</text>}/><br />
+<label for="login">Login</label>
+<input id="login" type="text" readonly="readonly" @if (@Model.PreCadastro != null) {<text>value="@Model.PreCadastro.MembershipUserName"</text>} /><br />
+<label for="nome">Nome completo</label>
+<input id="nome" type="text" @if (@Model.PreCadastro != null) {<text>value="@Model.PreCadastro.NomeCompleto"</text>} /><br />
+<label for="cpf">CPF</label>
+<input id="cpf" type="text" @if (@Model.PreCadastro != null) {<text>value="@Model.PreCadastro.Cpf"</text>} /><br />
+<label for="cadastradoPor">Cadastrado por</label>
+<input id="cadastradoPor" type="text" @if (@Model.PreCadastro != null && Model.PreCadastro.CadastradoPorReference != null) {<text>value="@Model.PreCadastro.CadastradoPorReference.NomeCompleto"</text>} /><br />
+<label for="superior">Superior</label>
+<input id="superior" type="text" @if (@Model.PreCadastro != null && Model.PreCadastro.SuperiorReference != null) {<text>value="@Model.PreCadastro.SuperiorReference.NomeCompleto"</text>} /><br /><br />
+
+<input id="salvar" type="button" value="Salvar"/>
+<input id="cancelar" type="button" value="Cancelar"/>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#salvar').click(function () {
+            $('#login, #nome, #cpf, #cadastradoPor, #superior').removeClass('invalid');
+            if ($.trim($('#login').val()) == '') { $('#login').addClass('invalid'); return; }
+            if ($.trim($('#nome').val()) == '') { $('#nome').addClass('invalid'); return; }
+            if ($.trim($('#cpf').val()) == '') { $('#cpf').addClass('invalid'); return; }
+
+            $('#salvar').val('Aguarde...');
+
+            $.ajax({
+                url: '/PreCad/Admin/Salva',
+                data: {
+                    login: $('#login').val(),
+                    nome: $('#nome').val(),
+                    cpf: $('#cpf').val(),
+                    cadastradoPor: $('#cadastradoPor').val(),
+                    superior: $('#superior').val()
+                }, 
+                type: 'post'
+            }).done(function (r) {
+                alert('pré-cadastro: ' + r.resultado);
+            }).fail(function () {
+                alert('erro ao salvar pré-cadastro');
+            }).always(function () {
+                $('#salvar').val('Salvar');
+            });
+        });
+        $('#cancelar').click(function () {
+            history.go(-1);
+        });
+    });
+</script>
