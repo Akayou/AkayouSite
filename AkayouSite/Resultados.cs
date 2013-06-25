@@ -10,6 +10,7 @@ namespace AkayouSite
         OK, 
         USUARIO_INEXISTENTE, 
         PRIMEIRO_ACESSO, 
-        INFORMACAO_INSUFICIENTE
+        INFORMACAO_INSUFICIENTE, 
+        CADASTRO_NAO_ENCONTRADO
     }
 }

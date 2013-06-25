@@ -70,6 +70,39 @@
     .nav2 .avancar {
         cursor: pointer;
     }
+    .msg.termos {
+        top: 50px;
+        left: 356px;
+    }
+    .msg.termos .box {
+        height: 428px;
+    }
+    .msg.termos .box .scroller {
+        height: 300px;
+        margin-bottom: 25px;
+    }
+    .msg.termos .aceito {
+        float: left;
+    }
+    .msg.termos .fechar {
+        float: right;
+    }
+    .msg.cadastrado {
+        left: 356px;
+        top: 140px;
+    }
+    .msg.cadastrado p.p1 {
+        text-align: center;
+        font-weight: bold;
+        line-height: 20px;
+        height: 100px;
+    }
+    .msg.cadastrado .pagamento {
+        display: block;
+        width: 231px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @section Script {
@@ -106,7 +139,6 @@
         $('.menuitem:first').click();
         
         $('.nav2 .voltar').click(function() {
-            persiste();
             var aberta = $('.pagina:visible');
             if (aberta.hasClass('informacoes-pessoais')) return;
             else if (aberta.hasClass('endereco')) $('.menuitem[item=informacoes-pessoais]').click();
@@ -114,13 +146,24 @@
             else if (aberta.hasClass('seguranca')) $('.menuitem[item=informacoes-contato]').click();
         });
         $('.nav2 .avancar').click(function() {
-            persiste();
             var aberta = $('.pagina:visible');
             if (aberta.hasClass('seguranca')) return;
             else if (aberta.hasClass('informacoes-contato')) $('.menuitem[item=seguranca]').click();
             else if (aberta.hasClass('endereco')) $('.menuitem[item=informacoes-contato]').click();
             else if (aberta.hasClass('informacoes-pessoais')) $('.menuitem[item=endereco]').click();
         });
+
+        // se iniciando, mostra termos de uso
+        $('body').on('click', '#termosFechar', function() {
+            clearBox('.msg.termos');
+        });
+
+        @if (Model.CadastroGuid != null && Model.Iniciando) {
+            <text>
+            showBox('.msg.termos');
+            //showBox('.msg.cadastrado');
+            </text>
+        }
     });
 
     var persiste = function() {
@@ -208,3 +251,40 @@
 </div>
 
 <div class="sep1"><img src="/Content/Images/precad-sep-1.png" /></div>
+
+<div class="msg termos">
+    <div class="box">
+        <div class="tit"><img src="/Content/Images/precad-msg-termos.png" /></div>
+        <hr />
+        <div class="scroller">
+            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+            <h3>Seção 1.10.32 de "de Finibus Bonorum et Malorum", escrita por Cícero em 45 AC</h3>
+
+            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+
+            <h3>Tradução para o inglês por H. Rackha, feita em 1914</h3>
+
+            <p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</p>
+
+            <h3>Seção 1.10.33 de "de Finibus Bonorum et Malorum", escrita por Cícero em 45 AC</h3>
+
+            <p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."</p>
+        </div>
+        <span class="aceito"><input id="aceitoCheck" type="checkbox" />Li e aceito os termos e condições de uso</span>
+        <span class="fechar"><img id="termosFechar" src="/Content/Images/precad-modal-fechar-on.png" /></span>
+    </div>
+</div>
+
+<div class="msg cadastrado">
+    <div class="box">
+        <div class="tit"><img src="/Content/Images/precad-msg-cadastrado-parabens.png" /></div>
+        <p class="p1">
+            O cadastro do patrocinado com efetuado com sucesso.<br />
+            Para finalizar clique no botão abaixo para ser redirecionado 
+            para a página de pagamento da Acathus. Após o pagamento validado, 
+            enviaremos um e-mail para o seu patrocinado com o ID dele.
+        </p>
+        <span class="pagamento"><a href="/PreCad/Pagamento"><img src="/Content/Images/precad-msg-cadastrado-pagamento.png" /></a></span>
+    </div>
+</div>

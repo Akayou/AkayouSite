@@ -17,21 +17,25 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
         {
             string cadastroGuid;
             Db.Cadastro cadastro;
+            bool iniciando;
             if (Request.Cookies.AllKeys.Contains("CadastroGuid"))
             {
                 cadastroGuid = Request.Cookies["CadastroGuid"].Value;
                 cadastro = Db.Cadastro.SingleOrDefault(c => c.CadastroGuid == cadastroGuid);
+                iniciando = false;
             }
             else
             {
                 cadastroGuid = Guid.NewGuid().ToString();
                 Response.Cookies.Add(new HttpCookie("CadastroGuid", cadastroGuid));
                 cadastro = null;
+                iniciando = true;
             }
 
             var model = new Models.CadastroIndexViewModel()
             {
                 CadastroGuid = cadastroGuid, 
+                Iniciando = iniciando, 
                 Cadastro = cadastro
             };
 

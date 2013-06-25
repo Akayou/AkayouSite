@@ -217,7 +217,7 @@ namespace AkayouSite.Db
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CadastroGuid", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CadastroGuid", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string CadastroGuid
 		{
 			get

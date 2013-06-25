@@ -3,7 +3,7 @@
   <Table Name="dbo.Cadastro" Member="Cadastro">
     <Type Name="Cadastro">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CadastroGuid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CadastroGuid" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Finalizado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="DataCadastro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Patrocinador" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
