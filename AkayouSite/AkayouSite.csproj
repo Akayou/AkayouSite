@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Areas\PreCadastro\Controllers\AdminController.cs" />
     <Compile Include="Areas\PreCadastro\Controllers\CadastroController.cs" />
+    <Compile Include="Areas\PreCadastro\Controllers\HomeController.cs" />
     <Compile Include="Areas\PreCadastro\Controllers\UsuarioController.cs" />
     <Compile Include="Areas\PreCadastro\PreCadastroAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -186,6 +187,7 @@
     <Content Include="Views\Shared\_Master.cshtml" />
     <Content Include="Areas\PreCadastro\Views\Cadastro\Login.cshtml" />
     <Content Include="Areas\PreCadastro\Views\Cadastro\Index.cshtml" />
+    <Content Include="Areas\PreCadastro\Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

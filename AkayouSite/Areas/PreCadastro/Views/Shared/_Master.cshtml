@@ -6,6 +6,18 @@
     <title>@ViewBag.Title</title>
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     <script>
+        function showBox(divSelector) {
+            $('body').on('click', '.msgBackdrop', function () { clearBox(divSelector); });
+            $('.msgBackdrop').show();
+            $(divSelector).css('z-index', '2000').show();
+            $(divSelector + ' input[type=text]:first').focus();
+        }
+        function clearBox(divSelector) {
+            $(divSelector).css('z-index', '-2000').hide();
+            $('.msgBackdrop').hide();
+            $('body').off('click', '.msgBackdrop');
+        }
+
         @RenderSection("Script", false)
     </script>
     <style type="text/css">
@@ -51,19 +63,75 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .sep2 {
+            width: 690px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         footer {
             width: 500px;
             margin-left: auto;
             margin-right: auto;
             clear: left;
         }
+        .msg {
+            position: fixed;
+            background: #fff;
+            width: 642px;
+            top: 200px;
+            display: none;
+        }
+        .msg .box {
+            background: #e9e9e9;
+            margin: 25px;
+            padding: 25px;
+        }
+        .msg .box .tit {
+            width: 442px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .msg .field {
+            float: left;
+        }
+        .msg .field input[type=text] {
+            width: 170px;
+            height: 18px;
+            border: 1px solid #bababa;
+            font-size: 14pt;
+            padding: 6px;
+            margin-right: 21px;
+        }
+        .msg hr {
+            height: 1px;
+            background: #d3d3d3;
+            border: 0;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .msg a {
+            color: #333333;
+        }
+        .msgBackdrop {
+            width: 4000px;
+            height: 2500px;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background: rgba(0, 0, 0, .75);
+            z-index: 1999;
+            display: none;
+        }
+
         @RenderSection("Css", false)
     </style>
 </head>
 <body>
+    <div class="msgBackdrop"></div>
     <article>
 
-        <div class="logo-akayou"><img src="/Content/Images/precad-logo-akayou.png" /></div>
+        <div class="logo-akayou"><a href="/PreCad/Home"><img src="/Content/Images/precad-logo-akayou.png" /></a></div>
 
         <div class="sep1"><img src="/Content/Images/precad-sep-1.png" /></div>
     
