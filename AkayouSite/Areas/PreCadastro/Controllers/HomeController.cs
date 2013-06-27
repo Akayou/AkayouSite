@@ -11,9 +11,17 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
         //
         // GET: /PreCadastro/Home/
 
-        public ActionResult Index()
+        public ActionResult Index(string ReturnUrl)
         {
-            return View();
+            /*if (User.Identity.IsAuthenticated)
+                return ReturnUrl != null ? Redirect(ReturnUrl ?? "/PreCad/Perfil") as ActionResult : RedirectToAction("Index", "Perfil");*/
+
+            var model = new Models.HomeIndexViewModel()
+            {
+                ReturnUrl = ReturnUrl
+            };
+
+            return View(model);
         }
 
     }

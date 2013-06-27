@@ -129,7 +129,7 @@
     <Compile Include="Areas\PreCadastro\Controllers\AdminController.cs" />
     <Compile Include="Areas\PreCadastro\Controllers\CadastroController.cs" />
     <Compile Include="Areas\PreCadastro\Controllers\HomeController.cs" />
-    <Compile Include="Areas\PreCadastro\Controllers\UsuarioController.cs" />
+    <Compile Include="Areas\PreCadastro\Controllers\PerfilController.cs" />
     <Compile Include="Areas\PreCadastro\PreCadastroAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -170,9 +170,6 @@
     <Content Include="Areas\PreCadastro\Views\Shared\_Master.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\PreCadastro\Views\Usuario\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="AkayouSiteDb.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>AkayouSiteDb.designer.cs</LastGenOutput>
@@ -188,6 +185,7 @@
     <Content Include="Areas\PreCadastro\Views\Cadastro\Login.cshtml" />
     <Content Include="Areas\PreCadastro\Views\Cadastro\Index.cshtml" />
     <Content Include="Areas\PreCadastro\Views\Home\Index.cshtml" />
+    <Content Include="Areas\PreCadastro\Views\Perfil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

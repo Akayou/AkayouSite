@@ -1,4 +1,6 @@
-﻿@{
+﻿@model AkayouSite.Areas.PreCadastro.Models.HomeIndexViewModel
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
 }
@@ -48,7 +50,41 @@
 @section Script {
     $(document).ready(function() {
         $('#acessarPerfil').click(function() {
-            showBox('.msg.login');
+            $.ajax({
+                url: '/Login/EstaLogado', 
+                type: 'post'
+            }).done(function(r) {
+                if (r) document.location.href = '/PreCad/Perfil';
+                else showBox('.msg.login');
+            }).fail(function() {
+                showBox('.msg.login');
+            });
+        });
+
+        $('#loginEnviar').click(function () {
+            $('#enviar').val('Aguarde...');
+            $.ajax({
+                url: '/Login/Try',
+                type: 'post',
+                data: {
+                    l1: $('#login').val(),
+                    l2: $('#senha').val()
+                }
+            }).done(function (r) {
+                if (!r.ok) {
+                    if (r.hasOwnProperty('resultado')) {
+                        alert(r.resultado);
+                        return;
+                    }
+                    alert('login não realizado. por favor tente novamente');
+                    return;
+                }
+                document.location.href = '@(Model.ReturnUrl ?? "/PreCad/Perfil")';
+            }).fail(function () {
+                alert('erro ao realizar login');
+            }).always(function () {
+                $('#enviar').val('Enviar');
+            });
         });
     });
 }
@@ -72,7 +108,7 @@
         <hr />
         <span class="field"><input id="login" type="text" placeholder="Login" /></span>
         <span class="field"><input id="senha" type="text" placeholder="Senha" /></span>
-        <span class="field"><img class="acessar" src="/Content/Images/precad-msg-acessar-perfil.png" /></span>
+        <span class="field"><img id="loginEnviar" class="acessar" src="/Content/Images/precad-msg-acessar-perfil.png" /></span>
         <a class="esqueci">Esqueci a senha</a>
     </div>
 </div>

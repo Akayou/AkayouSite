@@ -8,8 +8,7 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
 {
     public class CadastroController : AkayouSite.Controllers.BaseController
     {
-        public ActionResult Login()
-        {
+        public ActionResult Login() {
             return View();
         }
 

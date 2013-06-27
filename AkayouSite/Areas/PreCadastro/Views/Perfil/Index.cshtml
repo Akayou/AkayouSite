@@ -1,0 +1,110 @@
+﻿@model AkayouSite.Areas.PreCadastro.Models.PerfilIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+}
+
+@section Css {
+    p.nome {
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .circulos {
+        width: 483px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 160px;
+    }
+    .circulos .circulo {
+        float: left;
+        margin-left: 15px;
+        margin-right: 15px;
+        background: url('/Content/Images/precad-perfil-circulo.png');
+        width: 131px;
+        height: 101px;
+        text-align: center;
+        padding-top: 28px;
+        font-size: 13pt;
+    }
+    .tit-cadastro {
+        width: 292px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .cadastrar {
+        width: 724px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 25px;
+    }
+    .cadastrar > span {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .msg.cadastro {
+        top: 50px;
+        left: 350px;
+    }
+    .msg.cadastro .box {
+        height: 450px;
+    }
+    .msg.cadastro .box .scroller {
+        height: 250px;
+    }
+    .msg.cadastro .bt {
+        margin-top: 5px;
+        display: block;
+        float: right;
+    }
+    #cadastrar-bt {
+        cursor: pointer;
+    }
+}
+
+@section Script {
+    $(document).ready(function() {
+        showBox('.msg.cadastro');
+    });
+}
+
+<p class="nome">Olá, @Model.Cadastro.Nome @Model.Cadastro.Sobrenome</p>
+
+<div class="circulos">
+    <div class="circulo">SEU ID<br />@Model.Cadastro.Id.ToString().PadLeft(7, '0')</div>
+    <div class="circulo">VOLUME PERNA ESQUERDA<br />@Model.VolumePernaEsquerda</div>
+    <div class="circulo">VOLUME PERNA DIREITA<br />@Model.VolumePernaDireita</div>
+</div>
+
+<div class="sep2"><img src="/Content/Images/precad-sep-2.png" /></div>
+
+<div class="tit-cadastro"><img src="/Content/Images/precad-cadastro-patrocinado.png" /></div>
+
+<div class="cadastrar">
+    <span class="esq"><img src="/Content/Images/precad-cadastrar-perna-esquerda.png" /></span>
+    <span class="dir"><img src="/Content/Images/precad-cadastrar-perna-direita.png" /></span>
+</div>
+
+<div class="sep2"><img src="/Content/Images/precad-sep-2.png" /></div>
+
+<div class="msg cadastro">
+    <div class="box">
+        <div class="tit"><img src="/Content/Images/precad-msg-cadastro.png" /></div>
+        <div class="tit"><img src="/Content/Images/precad-msg-perna-esquerda.png" /></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed ultricies tellus. Integer viverra placerat diam vitae feugiat.</p>
+        <hr />
+        <div class="scroller">
+            @foreach (var c in Model.PodeCadastrar) {
+            <input name="usuario" type="checkbox" value="@c.Id" />@c.Nome @c.Sobrenome<br />
+            }
+        </div>
+        <hr />
+        <div class="bt"><a href="/PreCad/Cadastro"><img id="cadastrar-bt" src="/Content/Images/precad-msg-cadastrar.png" /></a></div>
+    </div>
+</div>

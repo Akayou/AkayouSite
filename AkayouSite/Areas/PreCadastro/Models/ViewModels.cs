@@ -7,12 +7,17 @@ namespace AkayouSite.Areas.PreCadastro.Models
 {
     public class AdminIndexViewModel
     {
-        public List<AkayouSite.Db.Cadastro> PreCadastros { get; set; }
+        public List<AkayouSite.Db.Cadastro> Cadastros { get; set; }
     }
 
     public class AdminEditaViewModel
     {
-        public AkayouSite.Db.Cadastro PreCadastro { get; set; }
+        public AkayouSite.Db.Cadastro Cadastro { get; set; }
+    }
+
+    public class HomeIndexViewModel
+    {
+        public string ReturnUrl { get; set; }
     }
 
     public class CadastroIndexViewModel
@@ -20,5 +25,13 @@ namespace AkayouSite.Areas.PreCadastro.Models
         public string CadastroGuid { get; set; }
         public bool Iniciando { get; set; }
         public Db.Cadastro Cadastro { get; set; }
+    }
+
+    public class PerfilIndexViewModel
+    {
+        public Db.Cadastro Cadastro { get; set; }
+        public IEnumerable<Db.Cadastro> PodeCadastrar { get; set; }
+        public int VolumePernaEsquerda { get; set; }
+        public int VolumePernaDireita { get; set; }
     }
 }
