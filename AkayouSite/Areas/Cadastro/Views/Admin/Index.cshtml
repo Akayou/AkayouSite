@@ -1,15 +1,15 @@
-﻿@model AkayouSite.Areas.PreCadastro.Models.AdminIndexViewModel
+﻿@model AkayouSite.Areas.Cadastro.Models.AdminIndexViewModel
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+    Layout = "~/Areas/Cadastro/Views/Shared/_Master.cshtml";
 }
 
 <h2>Pré-Cadastro Akayou - Admin</h2>
 
-<a href="/PreCad/Admin/Edita">Novo</a>
+<a href="/Cadastro/Admin/Edita">Novo</a>
 
-@if (!(Model.PreCadastros != null && Model.PreCadastros.Count > 0))
+@if (!(Model.Cadastros != null && Model.Cadastros.Count > 0))
 {
     <p>Nenhum registro.</p>
 }
@@ -26,13 +26,13 @@ else {
         </tr>
     </thead>
     <tbody>
-    @foreach (var pc in Model.PreCadastros)
+    @foreach (var pc in Model.Cadastros)
     {
         <tr>
             <td>@pc.DataCadastro.ToString("dd/MM/yy")</td>
             <td>@pc.NomeCompleto</td>
             <td>@(pc.Cpf ?? "")</td>
-            <td><a href="/PreCad/Home/"@pc.CadastradoPorReference.NomeCompleto</td>
+            <td><a href="/Cadastro/Home/"@pc.CadastradoPorReference.NomeCompleto</td>
         </tr>
     }
     </tbody>

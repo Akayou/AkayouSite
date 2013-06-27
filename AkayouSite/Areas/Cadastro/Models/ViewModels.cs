@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AkayouSite.Areas.PreCadastro.Models
+namespace AkayouSite.Areas.Cadastro.Models
 {
     public class AdminIndexViewModel
     {

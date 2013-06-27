@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AkayouSite.Areas.PreCadastro.Controllers
+namespace AkayouSite.Areas.Cadastro.Controllers
 {
     public class HomeController : Controller
     {
         //
-        // GET: /PreCadastro/Home/
+        // GET: /Cadastro/Home/
 
         public ActionResult Index(string ReturnUrl)
         {

@@ -1,8 +1,8 @@
-﻿@model AkayouSite.Areas.PreCadastro.Models.PerfilIndexViewModel
+﻿@model AkayouSite.Areas.Cadastro.Models.PerfilIndexViewModel
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+    Layout = "~/Areas/Cadastro/Views/Shared/_Master.cshtml";
 }
 
 @section Css {
@@ -84,7 +84,7 @@
         $('#cadastrar-bt').click(function() {
             var upline = $('.msg.cadastro input[name=usuario]:checked:first').val();
             if (typeof upline == 'undefined') return;
-            document.location.href = '/PreCad/Cadastro?upline=' + upline;
+            document.location.href = '/Cadastro/Cadastro?upline=' + upline;
         });
     });
 }

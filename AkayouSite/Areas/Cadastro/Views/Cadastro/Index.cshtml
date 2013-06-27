@@ -1,8 +1,8 @@
-﻿@model AkayouSite.Areas.PreCadastro.Models.CadastroIndexViewModel
+﻿@model AkayouSite.Areas.Cadastro.Models.CadastroIndexViewModel
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+    Layout = "~/Areas/Cadastro/Views/Shared/_Master.cshtml";
 }
 
 @section Css {
@@ -103,6 +103,19 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .pagina.seguranca p {
+        margin-left: 100px;
+        font-size: 12pt;
+    }
+    .pagina.seguranca #seuLogin {
+        font-size: 16pt;
+    }
+    .pagina.seguranca #suaSenha {
+        font-size: 16pt;
+    }
+    .pagina.seguranca a.alterarSenha {
+        font-size: 10pt;
+    }
 }
 
 @section Script {
@@ -121,20 +134,39 @@
 
         // telas
         $('.menuitem').click(function() {
-            persiste();
-            
-            $('.pagina').hide();
+            var finalizar = $(this).attr('item') == 'seguranca';
+            var that = $(this);
+            persiste(finalizar)
+                .done(function(data) {
+                    //console.log(data);
+                    if (finalizar) {
+                        if (!data.ok) {
+                            alert('Erro: ' + data.resultado);
+                            return;
+                        }
+                        if (data.criado) 
+                            showBox('.msg.cadastrado');
+                    };
 
-            $('.nav2 .voltar, .nav2 .avancar').show();
-            if ($(this).attr('item') == 'informacoes-pessoais') $('.nav2 .voltar').hide();
-            else if ($(this).attr('item') == 'seguranca') $('.nav2 .avancar').hide();
+                    $('.pagina').hide();
 
-            $('.pagina.' + $(this).attr('item')).fadeIn('fast', function() {
-                $('.pagina:visible .field input:first').focus();
-            });
+                    // infos da última página
+                    if (that.attr('item') == 'seguranca') {
+                        $('.pagina.seguranca #seuLogin').text(data.login);
+                        $('.pagina.seguranca #suaSenha').text(data.senha);
+                    }
+
+                    $('.nav2 .voltar, .nav2 .avancar').show();
+                    if (that.attr('item') == 'informacoes-pessoais') $('.nav2 .voltar').hide();
+                    else if (that.attr('item') == 'seguranca') $('.nav2 .avancar').hide();
+
+                    $('.pagina.' + that.attr('item')).fadeIn('fast', function() {
+                        $('.pagina:visible .field input:first').focus();
+                    });
             
-            $('.menuitem').mouseleave();
-            $('.menuitem[item=' + $(this).attr('item') + ']').mouseenter();
+                    $('.menuitem').mouseleave();
+                    $('.menuitem[item=' + that.attr('item') + ']').mouseenter();
+                });
         });
         $('.menuitem:first').click();
         
@@ -166,12 +198,12 @@
         }
     });
 
-    var persiste = function() {
-        $.ajax({
-            url: '/PreCad/Cadastro/Persiste', 
+    var persiste = function(finalizar) {
+        return $.ajax({
+            url: '/Cadastro/Cadastro/Persiste', 
             type: 'post', 
             data: {
-                finalizar: false, 
+                finalizar: finalizar, 
                 cadastroGuid: $('#cadastroGuid').val(), 
                 upline: $('#upline').val(), 
                 nome: $('#nome').val(), 
@@ -242,7 +274,11 @@
     </div>
 </div>
 <div class="pagina seguranca" item="seguranca">
-
+    <p>Seu login é:<br />
+    <span id="seuLogin"></span></p>
+    <p>Sua senha é:<br />
+    <span id="suaSenha"></span><br />
+    <a class="alterarSenha" href="">Alterar a senha</a></p>
 </div>
 </form>
 
@@ -286,6 +322,6 @@
             para a página de pagamento da Acathus. Após o pagamento validado, 
             enviaremos um e-mail para o seu patrocinado com o ID dele.
         </p>
-        <span class="pagamento"><a href="/PreCad/Pagamento"><img src="/Content/Images/precad-msg-cadastrado-pagamento.png" /></a></span>
+        <span class="pagamento"><a href="/Cadastro/Pagamento"><img src="/Content/Images/precad-msg-cadastrado-pagamento.png" /></a></span>
     </div>
 </div>

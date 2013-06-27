@@ -1,8 +1,8 @@
-﻿@model AkayouSite.Areas.PreCadastro.Models.HomeIndexViewModel
+﻿@model AkayouSite.Areas.Cadastro.Models.HomeIndexViewModel
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/PreCadastro/Views/Shared/_Master.cshtml";
+    Layout = "~/Areas/Cadastro/Views/Shared/_Master.cshtml";
 }
 
 @section Css {
@@ -60,7 +60,7 @@
                 url: '/Login/EstaLogado', 
                 type: 'post'
             }).done(function(r) {
-                if (r) document.location.href = '/PreCad/Perfil';
+                if (r) document.location.href = '/Cadastro/Perfil';
                 else showBox('.msg.login');
             }).fail(function() {
                 showBox('.msg.login');
@@ -88,7 +88,7 @@
                     $('.msg.login .err').text('Login não realizado. Por favor tente novamente.');
                     return;
                 }
-                document.location.href = '@(Model.ReturnUrl ?? "/PreCad/Perfil")';
+                document.location.href = '@(Model.ReturnUrl ?? "/Cadastro/Perfil")';
             }).fail(function () {
                 alert('erro ao realizar login');
             }).always(function () {
@@ -106,7 +106,7 @@
 
 <div class="opcoes">
     <span class="left"><a id="acessarPerfil"><img class="voltar" src="/Content/Images/precad-home-perfil.png" /></a></span>
-    <span class="right"><a href="/PreCad/Cadastro"><img class="avancar" src="/Content/Images/precad-home-cadastrar.png" /></a></span>
+    <span class="right"><a href="/Cadastro/Cadastro"><img class="avancar" src="/Content/Images/precad-home-cadastrar.png" /></a></span>
 </div>
 
 <div class="sep2"><img src="/Content/Images/precad-sep-2.png" /></div>

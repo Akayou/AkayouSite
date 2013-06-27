@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
-namespace AkayouSite.Areas.PreCadastro.Controllers
+namespace AkayouSite.Areas.Cadastro.Controllers
 {
     public class CadastroController : AkayouSite.Controllers.BaseController
     {
@@ -76,9 +77,14 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
             if (User.Identity.IsAuthenticated)
                 patrocinadorId = Db.Cadastro.Single(c => c.MembershipUserName == User.Identity.Name).Id;
 
+            string id;
+            string senha = "123456";
+
+            bool criado = false;
             var cadastro = Db.Cadastro.SingleOrDefault(c => c.CadastroGuid == cadastroGuid);
             if (cadastro == null)
             {
+                criado = true;
                 cadastro = new Db.Cadastro();
                 cadastro.Finalizado = finalizar;
                 cadastro.CadastroGuid = cadastroGuid;
@@ -112,6 +118,10 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
 
                 Db.Cadastro.InsertOnSubmit(cadastro);
                 Db.SubmitChanges();
+
+                id = cadastro.Id.ToString().PadLeft(7);
+
+                Membership.CreateUser(id, senha, email);
             }
             else
             {
@@ -145,9 +155,11 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
                 }
 
                 Db.SubmitChanges();
+
+                id = cadastro.Id.ToString().PadLeft(7);
             }
 
-            return Json(new { ok = true });
+            return Json(new { ok = true, criado = criado, login = cadastro.Id.ToString().PadLeft(7), senha = senha });
         }
 
         long EncontraUpline()

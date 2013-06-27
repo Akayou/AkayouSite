@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AkayouSite.Areas.PreCadastro.Controllers
+namespace AkayouSite.Areas.Cadastro.Controllers
 {
     public class PerfilController : AkayouSite.Controllers.BaseController
     {
