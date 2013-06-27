@@ -37,10 +37,16 @@
         display: block;
     }
     .msg.login .box {
-        height: 110px;
+        height: 140px;
     }
     .msg.login .field img.acessar {
         cursor: pointer;
+    }
+    .msg.login .err {
+        text-align: center;
+        color: red;
+        margin-top: 15px;
+        font-size: 10pt;
     }
     #acessarPerfil {
         cursor: pointer;
@@ -63,6 +69,7 @@
 
         $('#loginEnviar').click(function () {
             $('#enviar').val('Aguarde...');
+            $('.sg.login .err').text('');
             $.ajax({
                 url: '/Login/Try',
                 type: 'post',
@@ -73,10 +80,12 @@
             }).done(function (r) {
                 if (!r.ok) {
                     if (r.hasOwnProperty('resultado')) {
-                        alert(r.resultado);
+                        $('.msg.login .err').text(
+                            r.resultado == 'USUARIO_INEXISTENTE' ? 'Usuário não encontrado.' : 
+                            r.resultado);
                         return;
                     }
-                    alert('login não realizado. por favor tente novamente');
+                    $('.msg.login .err').text('Login não realizado. Por favor tente novamente.');
                     return;
                 }
                 document.location.href = '@(Model.ReturnUrl ?? "/PreCad/Perfil")';
@@ -105,6 +114,7 @@
 <div class="msg login">
     <div class="box">
         <div class="tit"><img src="/Content/Images/precad-msg-loginacesso.png" /></div>
+        <div class="err"></div>
         <hr />
         <span class="field"><input id="login" type="text" placeholder="Login" /></span>
         <span class="field"><input id="senha" type="text" placeholder="Senha" /></span>

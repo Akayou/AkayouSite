@@ -12,7 +12,7 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
             return View();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(long? upline)
         {
             string cadastroGuid;
             Db.Cadastro cadastro;
@@ -34,6 +34,7 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
             var model = new Models.CadastroIndexViewModel()
             {
                 CadastroGuid = cadastroGuid, 
+                Upline = upline, 
                 Iniciando = iniciando, 
                 Cadastro = cadastro
             };
@@ -71,6 +72,10 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
                     return Json(new { ok = false, resultado = Resultado.INFORMACAO_INSUFICIENTE.ToString() });
             }
 
+            long? patrocinadorId = null;
+            if (User.Identity.IsAuthenticated)
+                patrocinadorId = Db.Cadastro.Single(c => c.MembershipUserName == User.Identity.Name).Id;
+
             var cadastro = Db.Cadastro.SingleOrDefault(c => c.CadastroGuid == cadastroGuid);
             if (cadastro == null)
             {
@@ -78,7 +83,7 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
                 cadastro.Finalizado = finalizar;
                 cadastro.CadastroGuid = cadastroGuid;
                 cadastro.DataCadastro = DateTime.Now;
-                cadastro.Patrocinador = null;
+                cadastro.Patrocinador = patrocinadorId;
 
                 if (!finalizar)
                 {
@@ -112,6 +117,7 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
             {
                 // Só atualiza informações pessoais
                 cadastro.DataCadastro = DateTime.Now;
+                cadastro.Patrocinador = patrocinadorId;
                 cadastro.Nome = nome;
                 cadastro.Sobrenome = sobrenome;
                 cadastro.Cpf = cpf;

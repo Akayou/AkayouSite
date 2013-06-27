@@ -23,6 +23,7 @@ namespace AkayouSite.Areas.PreCadastro.Models
     public class CadastroIndexViewModel
     {
         public string CadastroGuid { get; set; }
+        public long? Upline { get; set; }
         public bool Iniciando { get; set; }
         public Db.Cadastro Cadastro { get; set; }
     }

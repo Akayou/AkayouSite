@@ -33,7 +33,9 @@ namespace AkayouSite.Controllers
             var membershipUser = Membership.GetUser(l1);
 
             // Não cadastrado
-            if (membershipUser == null) return Json(new { ok = false, resultado = Resultado.USUARIO_INEXISTENTE.ToString() });
+            if (membershipUser == null) return Json(new { ok = false, resultado = Resultado.LOGIN_INCORRETO.ToString() });
+
+            if (!Membership.ValidateUser(l1, l2)) return Json(new { ok = false, resultado = Resultado.LOGIN_INCORRETO.ToString() });
 
             FormsAuthentication.SetAuthCookie(membershipUser.UserName, true);
 

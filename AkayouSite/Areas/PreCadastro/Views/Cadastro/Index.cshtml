@@ -173,7 +173,7 @@
             data: {
                 finalizar: false, 
                 cadastroGuid: $('#cadastroGuid').val(), 
-                upline: null, 
+                upline: $('#upline').val(), 
                 nome: $('#nome').val(), 
                 sobrenome: $('#sobrenome').val(), 
                 cpf: $('#cpf').val(), 
@@ -203,6 +203,7 @@
 
 <form class="cadastro">
 <input id="cadastroGuid" type="hidden" value="@Model.CadastroGuid" />
+<input id="upline" type="hidden" value="@(Model.Upline.HasValue ? Model.Upline.Value.ToString() : "")" />
 <div class="pagina informacoes-pessoais" item="informacoes-pessoais">
     <div class="col esq">
         <span class="field"><label for="nome">Nome*</label><input id="nome" type="text" value="@(Model.Cadastro != null ? Model.Cadastro.Nome : "")" /></span>

@@ -13,8 +13,8 @@ namespace AkayouSite.Areas.PreCadastro.Controllers
 
         public ActionResult Index(string ReturnUrl)
         {
-            /*if (User.Identity.IsAuthenticated)
-                return ReturnUrl != null ? Redirect(ReturnUrl ?? "/PreCad/Perfil") as ActionResult : RedirectToAction("Index", "Perfil");*/
+            if (User.Identity.IsAuthenticated)
+                return ReturnUrl != null ? Redirect(ReturnUrl ?? "/PreCad/Perfil") as ActionResult : RedirectToAction("Index", "Perfil");
 
             var model = new Models.HomeIndexViewModel()
             {
