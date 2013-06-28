@@ -21,8 +21,8 @@ namespace AkayouSite.Areas.Cadastro.Controllers
             {
                 Cadastro = cadastro, 
                 PodeCadastrar = podeCadastrar, 
-                VolumePernaEsquerda = 100, 
-                VolumePernaDireita = 100
+                VolumePernaEsquerda = 0, 
+                VolumePernaDireita = 0
             };
 
             return View(model);
