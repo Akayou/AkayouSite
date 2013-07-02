@@ -121,6 +121,9 @@ namespace AkayouSite.Areas.Cadastro.Controllers
 
                 id = cadastro.Id.ToString().PadLeft(7);
 
+                cadastro.MembershipUserName = id;
+                Db.SubmitChanges();
+
                 Membership.CreateUser(id, senha, email);
             }
             else
@@ -143,6 +146,8 @@ namespace AkayouSite.Areas.Cadastro.Controllers
                 cadastro.TelResidencial = telResidencial;
                 cadastro.TelComercial = telComercial;
                 cadastro.Email = email;
+
+                cadastro.MembershipUserName = cadastro.Id.ToString().PadLeft(7);
 
                 // E upline, se informado
                 if (!finalizar)

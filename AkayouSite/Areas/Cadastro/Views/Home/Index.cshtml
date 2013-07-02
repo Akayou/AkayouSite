@@ -35,9 +35,11 @@
     .msg.login a.esqueci {
         float: right;
         display: block;
+        cursor: pointer;
+        margin-top: 10px;
     }
     .msg.login .box {
-        height: 140px;
+        height: 148px;
     }
     .msg.login .field img.acessar {
         cursor: pointer;
@@ -50,6 +52,35 @@
     }
     #acessarPerfil {
         cursor: pointer;
+    }
+    .msg.alterarSenha {
+        width: 400px;
+        left: 470px;
+        top: 100px;
+    }
+    .msg.alterarSenha .box {
+        height: 300px;
+    }
+    .msg.alterarSenha .box .tit {
+        width: 200px;
+    }
+    .msg.alterarSenha label {
+        display: block;
+        font-weight: bold;
+        font-size: 9pt;
+        margin-bottom: 5px;
+    }
+    .msg.alterarSenha .field {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .msg.alterarSenha .field input[type=text] {
+        width: 200px;
+    }
+    .msg.alterarSenha .bt {
+        display: block;
+        float: right;
+        margin-top: 21px;
     }
 }
 
@@ -67,9 +98,13 @@
             });
         });
 
+        $('.msg.login a.esqueci').click(function() {
+            showBox('.msg.alterarSenha');
+        });
+
         $('#loginEnviar').click(function () {
             $('#enviar').val('Aguarde...');
-            $('.sg.login .err').text('');
+            $('.msg.login .err').text('Aguarde...');
             $.ajax({
                 url: '/Login/Try',
                 type: 'post',
@@ -80,9 +115,12 @@
             }).done(function (r) {
                 if (!r.ok) {
                     if (r.hasOwnProperty('resultado')) {
-                        $('.msg.login .err').text(
-                            r.resultado == 'USUARIO_INEXISTENTE' ? 'Usuário não encontrado.' : 
-                            r.resultado);
+                        window.setTimeout(function() {
+                            $('.msg.login .err').text(
+                                r.resultado == 'USUARIO_INEXISTENTE' ? 'Usuário não encontrado.' : 
+                                r.resultado == 'LOGIN_INCORRETO' ? 'Login incorreto.' : 
+                                r.resultado);
+                            }, 1500);
                         return;
                     }
                     $('.msg.login .err').text('Login não realizado. Por favor tente novamente.');
@@ -120,5 +158,25 @@
         <span class="field"><input id="senha" type="text" placeholder="Senha" /></span>
         <span class="field"><img id="loginEnviar" class="acessar" src="/Content/Images/precad-msg-acessar-perfil.png" /></span>
         <a class="esqueci">Esqueci a senha</a>
+    </div>
+</div>
+
+<div class="msg alterarSenha">
+    <div class="box">
+        <div class="tit"><img src="/Content/Images/precad-msg-alterar-senha-titulo.png" /></div>
+        <hr />
+        <div class="field">
+            <label for="senhaAntiga">Senha antiga*</label>
+            <input id="senhaAntiga" type="text" />
+        </div>
+        <div class="field">
+            <label for="novaSenha">Nova senha* (no mínimo 6 caracteres)</label>
+            <input id="novaSenha" type="text" />
+        </div>
+        <div class="field">
+            <label for="confirmarNovaSenha">Confirmar nova senha*</label>
+            <input id="confirmarNovaSenha" type="text" />
+        </div>
+        <span class="bt"><img id="alterarSenhaBt" src="/Content/Images/precad-msg-alterar-senha-bt.png" /></span>
     </div>
 </div>
